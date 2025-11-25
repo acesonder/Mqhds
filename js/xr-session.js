@@ -84,10 +84,11 @@ const XRSession = (function() {
         }
         
         try {
-            // Request AR session with passthrough
+            // Request AR session with passthrough for Meta Quest
+            // The 'passthrough' feature enables the video passthrough on Quest 3/3S
             xrSession = await navigator.xr.requestSession('immersive-ar', {
                 requiredFeatures: ['local-floor'],
-                optionalFeatures: ['hand-tracking', 'hit-test']
+                optionalFeatures: ['hand-tracking', 'hit-test', 'passthrough']
             });
             
             // Setup session event handlers

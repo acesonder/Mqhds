@@ -5,7 +5,7 @@ A mixed-reality memory assistant that lets you visually "tag" people you meet in
 ## Features
 
 ### 🎯 Core Functionality
-- **WebXR Passthrough Mode**: Full AR experience on Meta Quest 3/3S
+- **WebXR Passthrough Mode**: Full AR experience with video passthrough enabled on Meta Quest 3/3S. The app requests the `passthrough` WebXR feature to enable real-world visibility while overlaying digital content.
 - **Person Detection**: Continuously scans for people around you
 - **Local Database**: All data stored locally using IndexedDB (no cloud storage)
 - **Privacy-First**: No data shared between users or uploaded anywhere
@@ -121,6 +121,16 @@ Mqhds/
 - WebXR Device API support
 - IndexedDB support
 - ES6+ JavaScript support
+
+### Passthrough Mode
+The application uses WebXR's `immersive-ar` session mode with the `passthrough` optional feature to enable real-world visibility on Meta Quest devices. When running on Meta Quest 3 or 3S:
+
+1. The app requests an AR session with passthrough capability
+2. The headset's cameras provide a live video feed of the real world
+3. Digital overlays (speech bubbles, HUD elements) are rendered on top of the passthrough view
+4. All app features (person detection, HUD overlay, navigation) work seamlessly in passthrough mode
+
+If passthrough is not available (e.g., on desktop browsers), the app automatically falls back to demo mode with simulated detections.
 
 ### Privacy & Data Storage
 - All data is stored locally in the browser's IndexedDB
