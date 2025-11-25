@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Memory Assistant</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Main container -->
+    <div id="app-container">
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <h1>MR Memory Assistant</h1>
+            <p>A mixed-reality memory assistant for Meta Quest 3/3S</p>
+            <button id="start-ar-btn">Start AR Session</button>
+            <button id="view-history-btn">View History</button>
+            <div id="device-status"></div>
+        </div>
+
+        <!-- AR Scene Container -->
+        <div id="ar-scene" style="display: none;">
+            <!-- Debug Overlay -->
+            <div id="debug-overlay">
+                <div id="debug-webxr-status">WebXR: Checking...</div>
+                <div id="debug-session-status">Session: Not Started</div>
+                <div id="debug-detection-count">People Detected: 0</div>
+                <div id="debug-errors"></div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div id="filter-controls">
+                <button class="filter-btn active" data-filter="new">🔵 New</button>
+                <button class="filter-btn active" data-filter="known">🟠 Known</button>
+                <button class="filter-btn active" data-filter="frequent">🔴 Frequent</button>
+                <button class="filter-btn" data-filter="nearby">📍 Nearby</button>
+            </div>
+
+            <!-- Person Cards Container -->
+            <div id="person-cards-container"></div>
+
+            <!-- Navigation Hint -->
+            <div id="nav-hint">
+                Hold X/A + ◀ ▶ to navigate
+            </div>
+
+            <!-- Exit Button -->
+            <button id="exit-ar-btn">Exit AR</button>
+        </div>
+
+        <!-- History Dashboard -->
+        <div id="history-dashboard" style="display: none;">
+            <div class="dashboard-header">
+                <button id="back-to-start-btn">← Back</button>
+                <h2>Encounter History</h2>
+            </div>
+            <div id="history-filters">
+                <input type="text" id="search-input" placeholder="Search by name...">
+                <select id="sort-select">
+                    <option value="recent">Most Recent</option>
+                    <option value="encounters">Most Encounters</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+            <div id="history-list"></div>
+        </div>
+
+        <!-- Person Detail Modal -->
+        <div id="person-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="modal-person-info">
+                    <div id="modal-avatar" class="avatar-placeholder"></div>
+                    <input type="text" id="modal-name" placeholder="Enter name...">
+                </div>
+                <div id="modal-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Encounters:</span>
+                        <span id="modal-encounter-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">First Seen:</span>
+                        <span id="modal-first-seen">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Last Seen:</span>
+                        <span id="modal-last-seen">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time Since:</span>
+                        <span id="modal-time-since">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Location:</span>
+                        <span id="modal-location">-</span>
+                    </div>
+                </div>
+                <div id="modal-notes">
+                    <label>Notes:</label>
+                    <textarea id="modal-notes-input" placeholder="Add notes about this person..."></textarea>
+                </div>
+                <div id="modal-actions">
+                    <button id="modal-save-btn">Save Changes</button>
+                    <button id="modal-replay-btn">Memory Trail Replay</button>
+                    <button id="modal-delete-btn" class="danger">Delete Record</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/database.js"></script>
+    <script src="js/person-tracker.js"></script>
+    <script src="js/hud-overlay.js"></script>
+    <script src="js/xr-session.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
