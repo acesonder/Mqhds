@@ -223,8 +223,9 @@ const XRSession = (function() {
             const gamepad = inputSource.gamepad;
             const isLeft = inputSource.handedness === 'left';
             
-            // Check for X button (left) or A button (right) - usually button index 4 or 5
-            const primaryButton = gamepad.buttons[4] || gamepad.buttons[0];
+            // Check for X button (left) or A button (right)
+            // Button indices: 0=trigger, 1=squeeze, 4=X/A, 5=Y/B (Meta Quest controllers)
+            const primaryButton = gamepad.buttons[4] || gamepad.buttons[5] || gamepad.buttons[0];
             
             if (primaryButton && primaryButton.pressed) {
                 if (isLeft && !leftControllerPressed) {

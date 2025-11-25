@@ -202,7 +202,7 @@ const Dashboard = (function() {
         
         const person = await MemoryDB.getPerson(personId);
         if (!person || person.locations.length === 0) {
-            alert('No location data available for replay');
+            HUDOverlay.showToast('No location data available for replay', 'warning');
             return;
         }
         
@@ -225,16 +225,18 @@ const Dashboard = (function() {
         const modal = document.getElementById('person-modal');
         const personId = parseInt(modal.dataset.personId);
         
-        if (!confirm('Are you sure you want to delete this record? This cannot be undone.')) {
-            return;
-        }
-        
-        await MemoryDB.deletePerson(personId);
-        
-        // Close modal and refresh
-        HUDOverlay.closePersonModal();
-        await refreshHistoryList();
-        HUDOverlay.renderPersonCards(PersonTracker.getDetectedPersons());
+        HUDOverlay.showConfirmDialog(
+            'Are you sure you want to delete this record? This cannot be undone.',
+            async () => {
+                await MemoryDB.deletePerson(personId);
+                
+                // Close modal and refresh
+                HUDOverlay.closePersonModal();
+                await refreshHistoryList();
+                HUDOverlay.renderPersonCards(PersonTracker.getDetectedPersons());
+                HUDOverlay.showToast('Record deleted successfully', 'success');
+            }
+        );
     }
     
     /**

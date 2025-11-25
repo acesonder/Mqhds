@@ -141,8 +141,10 @@ const PersonTracker = (function() {
             detectedPersons.splice(index, 1);
             
             // Adjust selected index if needed
-            if (selectedIndex >= detectedPersons.length) {
-                selectedIndex = Math.max(0, detectedPersons.length - 1);
+            if (detectedPersons.length === 0) {
+                selectedIndex = -1;
+            } else if (selectedIndex >= detectedPersons.length) {
+                selectedIndex = detectedPersons.length - 1;
             }
             
             if (onPersonLost) {
