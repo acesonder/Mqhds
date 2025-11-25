@@ -101,6 +101,13 @@ const XRSession = (function() {
             // Start render loop
             xrSession.requestAnimationFrame(onXRFrame);
             
+            // Show AR scene
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('ar-scene').style.display = 'block';
+            
+            // Start person tracking (simulation for now, would use ML in production)
+            PersonTracker.startDetection();
+            
             HUDOverlay.updateDebugInfo('session-status', 'Session: Active');
             
             if (onSessionStart) {
